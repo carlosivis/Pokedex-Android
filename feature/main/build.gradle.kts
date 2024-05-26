@@ -6,7 +6,7 @@ plugins {
 android {
     namespace = "dev.carlosivis.pokedex.feature.main"
     compileSdk = 34
-
+    compileSdkPreview = "UpsideDownCake"
     defaultConfig {
         minSdk = 24
 
@@ -36,7 +36,15 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.ui.tooling.preview.android)
+    implementation(project(":core:uikit"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation(platform(libs.kotlin.bom))
+    implementation(libs.koin.android)
+    implementation(libs.androidx.compose.material)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(platform(libs.androidx.ui.tooling.preview))
+
 }

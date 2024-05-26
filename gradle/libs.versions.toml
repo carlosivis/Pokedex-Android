@@ -17,6 +17,7 @@ gson = "2.10.1"
 okhttp3 = "4.9.1"
 retrofit = "2.9.0"
 foundationAndroid = "1.6.7"
+uiToolingPreviewAndroid = "1.6.7"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidxCore" }
@@ -54,6 +55,7 @@ okhttp3-logging-interception = { group = "com.squareup.okhttp3", name = "logging
 retrofit2-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 retrofit2-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 androidx-foundation-android = { group = "androidx.compose.foundation", name = "foundation-android", version.ref = "foundationAndroid" }
+androidx-ui-tooling-preview-android = { group = "androidx.compose.ui", name = "ui-tooling-preview-android", version.ref = "uiToolingPreviewAndroid" }
 
 
 [plugins]
