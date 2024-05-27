@@ -1,14 +1,9 @@
 pluginManagement {
     repositories {
-        google {
-            content {
-                includeGroupByRegex("com\\.android.*")
-                includeGroupByRegex("com\\.google.*")
-                includeGroupByRegex("androidx.*")
-            }
-        }
+        google()
         mavenCentral()
         gradlePluginPortal()
+
     }
 }
 dependencyResolutionManagement {
@@ -22,7 +17,6 @@ dependencyResolutionManagement {
 rootProject.name = "Pokedex"
 include(":app")
 include(":repository")
-include(":core")
 include(":core:core")
 include(":core:navigation")
 include(":core:uikit")

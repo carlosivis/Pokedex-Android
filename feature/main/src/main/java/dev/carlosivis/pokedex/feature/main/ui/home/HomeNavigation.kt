@@ -1,7 +1,7 @@
 package dev.carlosivis.pokedex.feature.main.ui.home
 
-import dev.carlosivis.pokedex.feature.main.model.PokemonModel
+import dev.carlosivis.pokedex.feature.main.model.PokemonNameModel
 
 interface HomeNavigation {
-    fun navigateToDetails(pokemon: PokemonModel)
+    fun navigateToDetails(pokemon: PokemonNameModel)
 }

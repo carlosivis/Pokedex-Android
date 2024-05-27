@@ -21,6 +21,8 @@ class HomeViewModel(
         when (action) {
             is Navigate.Details -> navigation.navigateToDetails(action.pokemon)
             is HomeViewAction.Set.Loading -> setLoading(action.isLoading)
+            is Get.Page.Next -> TODO()
+            is Get.Pokemon -> TODO()
         }
     }
 

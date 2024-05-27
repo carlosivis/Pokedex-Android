@@ -1,6 +1,6 @@
 package dev.carlosivis.pokedex.feature.main.ui.home
 
-import dev.carlosivis.pokedex.feature.main.model.PokemonModel
+import dev.carlosivis.pokedex.feature.main.model.PokemonNameModel
 
 sealed class HomeViewAction {
 
@@ -11,7 +11,7 @@ sealed class HomeViewAction {
         }
     }
     object Navigate{
-      data class Details(val pokemon: PokemonModel): HomeViewAction()
+      data class Details(val pokemon: PokemonNameModel): HomeViewAction()
     }
     object Set {
         data class Loading(val isLoading: Boolean): HomeViewAction()

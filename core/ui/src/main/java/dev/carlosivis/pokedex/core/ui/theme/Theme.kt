@@ -1,4 +1,4 @@
-package dev.carlosivis.pokedex.core.uikit.theme
+package dev.carlosivis.pokedex.core.ui.theme
 
 import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -14,7 +14,7 @@ private val LightColors = lightColors()
 private val DarkColors = darkColors()
 
 @Composable
-fun PokemonTheme(
+fun PokedexTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {

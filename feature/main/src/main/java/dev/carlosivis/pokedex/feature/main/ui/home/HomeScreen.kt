@@ -1,7 +1,6 @@
 package dev.carlosivis.pokedex.feature.main.ui.home
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,12 +14,18 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.Role.Companion.Button
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType.Companion.Text
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dev.carlosivis.pokedex.core.uikit.components.LazyColumnPaging
-import dev.carlosivis.pokedex.feature.main.model.PokemonModel
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import dev.carlosivis.pokedex.feature.main.R
+import dev.carlosivis.pokedex.feature.main.model.PokemonNameModel
 import dev.carlosivis.pokedex.feature.main.ui.home.HomeViewAction.Get
 import dev.carlosivis.pokedex.feature.main.ui.home.HomeViewAction.Navigate
 
@@ -42,38 +47,49 @@ private fun Content(
             .fillMaxSize()
             .padding(horizontal = 16.dp)
     ) {
-        LazyColumnPaging(
-            modifier = Modifier.weight(1f),
-            items = state.pokemons,
-            requestNewPage = { action(Get.Page.Next)},
-            itemContent = {
-                PokemonNameCard(it){action(Navigate.Details(it))}
-            }
-        )
+        TODO()
+//        LazyColumn(
+//            modifier = Modifier.weight(1f),
+//            items = state.pokemons,
+//            requestNewPage = { action(Get.Page.Next)},
+//            itemContent = {
+//                PokemonNameCard(it){action(Navigate.Details(it))}
+//            }
+//        )
     }
 
 }
 
 @Composable
 fun PokemonNameCard(
-    data: PokemonModel,
+    data: PokemonNameModel,
     onClick: () -> Unit
 ) {
     Button(
         shape = RoundedCornerShape(12.dp),
         onClick = {onClick()}
     ) {
-        Row(
+        Column (
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(all = 2.dp),
-            verticalAlignment = Alignment.CenterVertically
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            AsyncImage(
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(data.getImageUrl())
+                    .crossfade(true)
+                    .build(),
+                contentDescription = null,
+                modifier = Modifier.height(70.dp),
+                placeholder = painterResource(org.koin.android.R.drawable.notification_bg)
+            )
             Text(modifier = Modifier.weight(1f),
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold,
                 text = data.name)
         }
+
     }
     Spacer(modifier = Modifier.height(8.dp))
 }
@@ -82,6 +98,6 @@ fun PokemonNameCard(
 @Preview
 @Composable
 fun PokemonNameCardPreview() {
-    PokemonNameCard(data = PokemonModel(name = "Bulbasaur", url = ""), onClick = {})
+    PokemonNameCard(data = PokemonNameModel(name = "Bulbasaur", url = ""), onClick = {})
 }
 
