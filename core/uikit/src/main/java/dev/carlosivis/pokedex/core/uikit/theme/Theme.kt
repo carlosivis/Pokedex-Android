@@ -14,7 +14,7 @@ private val LightColors = lightColors()
 private val DarkColors = darkColors()
 
 @Composable
-fun PokemonTheme(
+fun PokedexTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {

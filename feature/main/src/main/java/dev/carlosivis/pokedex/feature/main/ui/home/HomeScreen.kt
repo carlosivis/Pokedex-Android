@@ -16,15 +16,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.Role.Companion.Button
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType.Companion.Text
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import dev.carlosivis.pokedex.feature.main.R
+import dev.carlosivis.pokedex.core.uikit.R.*
+import dev.carlosivis.pokedex.core.uikit.components.LazyColumnPaging
+import dev.carlosivis.pokedex.core.uikit.theme.PokedexTheme
 import dev.carlosivis.pokedex.feature.main.model.PokemonNameModel
 import dev.carlosivis.pokedex.feature.main.ui.home.HomeViewAction.Get
 import dev.carlosivis.pokedex.feature.main.ui.home.HomeViewAction.Navigate
@@ -47,15 +47,14 @@ private fun Content(
             .fillMaxSize()
             .padding(horizontal = 16.dp)
     ) {
-        TODO()
-//        LazyColumn(
-//            modifier = Modifier.weight(1f),
-//            items = state.pokemons,
-//            requestNewPage = { action(Get.Page.Next)},
-//            itemContent = {
-//                PokemonNameCard(it){action(Navigate.Details(it))}
-//            }
-//        )
+        LazyColumnPaging(
+            modifier = Modifier.weight(1f),
+            items = state.pokemons,
+            requestNewPage = { action(Get.Page.Next)},
+            itemContent = {
+                PokemonNameCard(it){action(Navigate.Details(it))}
+            }
+        )
     }
 
 }
@@ -82,7 +81,7 @@ fun PokemonNameCard(
                     .build(),
                 contentDescription = null,
                 modifier = Modifier.height(70.dp),
-                placeholder = painterResource(org.koin.android.R.drawable.notification_bg)
+                placeholder = painterResource(drawable.pokemon_placeholder)
             )
             Text(modifier = Modifier.weight(1f),
                 textAlign = TextAlign.Center,
@@ -98,6 +97,23 @@ fun PokemonNameCard(
 @Preview
 @Composable
 fun PokemonNameCardPreview() {
-    PokemonNameCard(data = PokemonNameModel(name = "Bulbasaur", url = ""), onClick = {})
+    PokedexTheme {
+        PokemonNameCard(data = PokemonNameModel(name = "Bulbasaur", url = ""), onClick = {})
+    }
+}
+
+@Composable
+fun Greeting(name: String, modifier: Modifier = Modifier) {
+    Text(
+        text = "Hello $name!",
+        modifier = modifier
+    )
+}
+@Preview
+@Composable
+fun HomeScreenPreview() {
+    PokedexTheme {
+        Greeting("Android")
+    }
 }
 

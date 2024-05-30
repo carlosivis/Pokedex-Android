@@ -1,3 +1,7 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+/deploymentTargetSelector.xml
+/render.experimental.xml
+/studiobot.xml
+/vcs.xml

@@ -1,9 +1,9 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google()
         mavenCentral()
         gradlePluginPortal()
-
     }
 }
 dependencyResolutionManagement {
@@ -13,6 +13,8 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 
 rootProject.name = "Pokedex"
 include(":app")
