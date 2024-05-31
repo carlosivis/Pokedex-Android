@@ -1,4 +1,4 @@
-package dev.carlosivis.pokedex.core.core
+package dev.carlosivis.pokedex.core.delegate
 
 import org.junit.Test
 

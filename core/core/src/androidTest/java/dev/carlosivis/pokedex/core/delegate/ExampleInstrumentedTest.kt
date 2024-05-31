@@ -1,4 +1,4 @@
-package dev.carlosivis.pokedex.core.core
+package dev.carlosivis.pokedex.core.delegate
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

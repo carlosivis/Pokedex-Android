@@ -12,23 +12,6 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
 }
 
 dependencies {
@@ -37,6 +20,8 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.ui.tooling.preview.android)
     implementation(project(":core:uikit"))
+    implementation(project(":core:core"))
+    implementation(project(":domain:pokemon"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -46,6 +31,8 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(platform(libs.androidx.ui.tooling.preview))
     implementation(libs.coil.compose)
+    implementation(libs.kotlinx.coroutines.core)
+
 
 
 }

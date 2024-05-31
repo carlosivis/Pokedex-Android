@@ -1,6 +1,8 @@
 package dev.carlosivis.pokedex.feature.main.ui.home
 
 import androidx.lifecycle.ViewModel
+import dev.carlosivis.pokedex.core.delegate.useCase
+import dev.carlosivis.pokedex.domain.pokemon.usecase.GetPokemonUseCase
 import dev.carlosivis.pokedex.feature.main.ui.home.HomeViewAction.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -13,6 +15,8 @@ class HomeViewModel(
     private val _state = MutableStateFlow(HomeViewState())
     val state = _state.asStateFlow()
 
+    private val getPokemonsUseCase: GetPokemonUseCase by useCase()
+
     private fun setLoading(isLoading: Boolean) {
         _state.update { it.copy(isLoading = isLoading) }
     }
@@ -22,9 +26,14 @@ class HomeViewModel(
             is Navigate.Details -> navigation.navigateToDetails(action.pokemon)
             is HomeViewAction.Set.Loading -> setLoading(action.isLoading)
             is Get.Page.Next -> TODO()
-            is Get.Pokemon -> TODO()
+            is Get.Pokemon -> getPokemons()
         }
     }
 
-
+    private fun getPokemons() {
+        getPokemonsUseCase(
+            onSuccess = {},
+            onFailure = {}
+        )
+    }
 }

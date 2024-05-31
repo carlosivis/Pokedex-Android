@@ -9,7 +9,7 @@ interface PokemonService {
     @GET("/pokemon")
     suspend fun getAll(): ResponseBody
 
-    @GET("/pokemon")
+    @GET("/pokemon/")
     suspend fun getPokemon(
         @Query("id") id: Int
     ): ResponseBody

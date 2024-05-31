@@ -62,6 +62,13 @@ dependencies {
     implementation(platform(libs.kotlin.bom))
     implementation(libs.koin.android)
 
+    implementation(project(":core:commons"))
+    implementation(project(":core:core"))
+    implementation(project(":core:navigation"))
+    implementation(project(":core:uikit"))
+    implementation(project(":data:remote"))
+    implementation(project(":repository"))
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

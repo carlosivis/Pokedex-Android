@@ -7,9 +7,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface PokemonRemoteDataSource {
 
-    fun getAll(): Flow<Either <List<PokemonNameDomain>>>
+    suspend fun getAll(): Either <List<PokemonNameDomain>>
 
-    fun getPokemon(id: Int): Flow<Either <PokemonDomain>>
+    suspend fun getPokemon(id: Int): Either <PokemonDomain>
 
-    fun getPages(page: Int, count: Int): Flow<Either <List<PokemonNameDomain>>>
+    suspend fun getPages(page: Int, count: Int): Either <List<PokemonNameDomain>>
 }
