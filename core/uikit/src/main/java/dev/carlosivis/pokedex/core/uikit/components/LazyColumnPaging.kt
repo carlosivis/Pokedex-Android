@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -24,8 +25,8 @@ fun <T> LazyColumnPaging(
     itemCount: Int = 10,
     itemsPerPage: Int = 30
 ) {
-    var lastIndexViewed by remember { mutableStateOf(0) }
-    var itemVisibleCount by remember { mutableStateOf(0) }
+    var lastIndexViewed by remember { mutableIntStateOf(0) }
+    var itemVisibleCount by remember { mutableIntStateOf(0) }
 
     LazyColumn(
         modifier = modifier,

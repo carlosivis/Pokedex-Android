@@ -23,7 +23,7 @@ class HomeViewModel(
 
     fun dispatchAction(action: HomeViewAction) {
         when (action) {
-            is Navigate.Details -> navigation.navigateToDetails(action.pokemon)
+            is Navigate.Details -> navigation.navigateToDetails(action.pokemonId)
             is HomeViewAction.Set.Loading -> setLoading(action.isLoading)
             is Get.Page.Next -> TODO()
             is Get.Pokemon -> getPokemons()
@@ -31,9 +31,5 @@ class HomeViewModel(
     }
 
     private fun getPokemons() {
-        getPokemonsUseCase(
-            onSuccess = {},
-            onFailure = {}
-        )
     }
 }

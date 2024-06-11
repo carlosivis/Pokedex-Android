@@ -1,6 +1,7 @@
 package dev.carlosivis.pokedex
 
 import android.app.Application
+import dev.carlosivis.pokedex.core.navigation.di.navigationModule
 import dev.carlosivis.pokedex.data.remote.di.remoteDataModule
 import dev.carlosivis.pokedex.repository.di.repositoryModule
 import org.koin.android.ext.koin.androidContext
@@ -13,7 +14,7 @@ class MainApplication: Application() {
         startKoin {
             modules(
                 listOf(
-                    //navigationModule,
+                    navigationModule,
                     remoteDataModule,
                     repositoryModule
                 )

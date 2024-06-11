@@ -1,38 +1,42 @@
 plugins {
     alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.compose.compiler)
+    id("kotlin-parcelize")
     alias(libs.plugins.jetbrainsKotlinAndroid)
+}
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 android {
     namespace = "dev.carlosivis.pokedex.feature.main"
     compileSdk = 34
-    defaultConfig {
-        minSdk = 24
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
 dependencies {
 
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.ui.tooling.preview.android)
+    implementation(platform(libs.kotlin.bom))
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui.tooling.preview)
     implementation(project(":core:uikit"))
     implementation(project(":core:core"))
     implementation(project(":domain:pokemon"))
+
+    implementation(libs.koin.android)
+    implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.coil.compose)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.lifecycle.viewmodel.ktx)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation(platform(libs.kotlin.bom))
-    implementation(libs.koin.android)
-    implementation(libs.androidx.compose.material)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(platform(libs.androidx.ui.tooling.preview))
-    implementation(libs.coil.compose)
-    implementation(libs.kotlinx.coroutines.core)
-
-
 
 }

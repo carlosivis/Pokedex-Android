@@ -2,15 +2,17 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
 }
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
 
 android {
     namespace = "dev.carlosivis.pokedex.data.remote"
-
-    defaultConfig {
-        minSdk = 24
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
+    compileSdk = 34
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
@@ -24,4 +26,5 @@ dependencies {
     implementation(libs.okhttp3.okhttp)
     implementation(libs.okhttp3.logging.interception)
     implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.androidx.core.ktx)
 }
