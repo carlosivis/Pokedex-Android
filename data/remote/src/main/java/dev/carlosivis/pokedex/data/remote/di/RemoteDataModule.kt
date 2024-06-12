@@ -13,7 +13,7 @@ val remoteDataModule = module {
 
     factory<PokemonService> {
         Retrofit(
-            baseUrl = "https://pokeapi.co/api/v2/",//TODO: add to BuildConfig
+            baseUrl = "https://pokeapi.co/api/v2/",
             interceptor = get()
         )
     }

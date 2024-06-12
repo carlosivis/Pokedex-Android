@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface PokemonRepository {
 
-    suspend fun getAll(): Flow<Either<Unit>>
+    suspend fun getAll(): Flow<Either<List<PokemonNameDomain>>>
 
     suspend fun getPokemon(id:Int): Flow<Either<PokemonDomain>>
 

@@ -7,8 +7,8 @@ import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
 
 val repositoryModule = module {
-    single<PokemonRepository> { PokemonRepositoryImpl(get(),get()) }
+    single<PokemonRepository> { PokemonRepositoryImpl(get()) }
+    // TODO: add local single<PokemonRepository> { PokemonRepositoryImpl(get(), get()) }
 
     loadKoinModules(domainPokemonModule)
-
 }
