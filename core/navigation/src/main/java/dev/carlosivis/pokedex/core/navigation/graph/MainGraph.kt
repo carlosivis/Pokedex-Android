@@ -6,16 +6,17 @@ import androidx.navigation.navigation
 import dev.carlosivis.pokedex.core.navigation.routes.MainRoutes
 import dev.carlosivis.pokedex.feature.main.ui.details.DetailsScreen
 import dev.carlosivis.pokedex.feature.main.ui.home.HomeScreen
+import dev.carlosivis.pokedex.feature.main.ui.splash.SplashScreen
 import org.koin.androidx.compose.getViewModel
 
 internal fun NavGraphBuilder.addMainGraph(){
     navigation(
-        route = "main_graph",
+        route = MainRoutes.branch.route,
         startDestination = MainRoutes.Splash.createRoute()
     ){
         addHomeScreen()
-        addSplashScreen()
         addDetailsScreen()
+        addSplashScreen()
     }
 }
 
@@ -24,7 +25,7 @@ private fun NavGraphBuilder.addSplashScreen(){
     composable(
         route = MainRoutes.Splash.createRoute()
     ) {
-        TODO( "add SplashScreen(getViewModel())")
+        SplashScreen(getViewModel())
     }
 }
 private fun NavGraphBuilder.addHomeScreen(){

@@ -23,7 +23,9 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(platform(libs.kotlin.bom))
     implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
+
     implementation(project(":core:uikit"))
     implementation(project(":core:core"))
     implementation(project(":domain:pokemon"))

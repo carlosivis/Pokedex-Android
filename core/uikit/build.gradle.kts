@@ -11,6 +11,9 @@ java {
 android {
     namespace = "dev.carlosivis.pokedex.core.uikit"
     compileSdk = 34
+    defaultConfig {
+        minSdk = 24
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
