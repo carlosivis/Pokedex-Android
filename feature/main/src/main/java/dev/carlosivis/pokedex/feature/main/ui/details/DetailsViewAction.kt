@@ -1,6 +1,5 @@
 package dev.carlosivis.pokedex.feature.main.ui.details
 
-import dev.carlosivis.pokedex.feature.main.model.PokemonModel
 
 sealed class DetailsViewAction {
     sealed class Navigate : DetailsViewAction() {
@@ -9,6 +8,6 @@ sealed class DetailsViewAction {
     }
 
     sealed class Set: DetailsViewAction() {
-        data class Pokemon(val pokemon: PokemonModel?) : Set()
+        data class Pokemon(val pokemon: String?) : Set()
     }
 }

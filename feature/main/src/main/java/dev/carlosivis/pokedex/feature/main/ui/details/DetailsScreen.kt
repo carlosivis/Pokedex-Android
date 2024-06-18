@@ -9,7 +9,7 @@ import dev.carlosivis.pokedex.feature.main.model.PokemonModel
 
 @Composable
 fun DetailsScreen(
-    pokemon: PokemonModel?,
+    pokemonId: String?,
     viewModel: DetailsViewModel){
     val state by viewModel.state.collectAsState()
     val action = viewModel::dispatchAction
@@ -17,7 +17,7 @@ fun DetailsScreen(
     Content(state = state, action = viewModel::dispatchAction)
 
     LaunchedEffect(Unit) {
-        action(DetailsViewAction.Set.Pokemon(pokemon))
+        action(DetailsViewAction.Set.Pokemon(pokemonId))
     }
 
 }

@@ -1,6 +1,7 @@
 package dev.carlosivis.pokedex.core.uikit.theme
 
 import android.app.Activity
+
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors

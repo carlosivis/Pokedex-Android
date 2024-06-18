@@ -8,10 +8,11 @@ sealed class HomeViewAction {
         object Pokemon : HomeViewAction()
         object Page {
             object Next : HomeViewAction()
+            object First : HomeViewAction()
         }
     }
     object Navigate{
-      data class Details(val pokemon: PokemonNameModel): HomeViewAction()
+      data class Details(val pokemonId: String): HomeViewAction()
     }
     object Set {
         data class Loading(val isLoading: Boolean): HomeViewAction()
