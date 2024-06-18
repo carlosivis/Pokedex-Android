@@ -30,4 +30,9 @@ dependencies {
     implementation(libs.okhttp3.logging.interception)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.androidx.core.ktx)
+
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
 }
