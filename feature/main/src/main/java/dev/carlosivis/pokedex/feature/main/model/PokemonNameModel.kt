@@ -9,13 +9,6 @@ data class PokemonNameModel(
     val name: String,
     val url: String,
 ): Parcelable {
-
-    fun mapToDomain(): PokemonNameDomain {
-        return PokemonNameDomain(
-            name,
-            url)
-    }
-
     fun getImageUrl(): String {
         val index = url.split("/".toRegex()).dropLast(1).last()
         return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/" +

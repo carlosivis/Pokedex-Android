@@ -8,6 +8,7 @@ sealed class HomeViewAction {
         object Pokemon : HomeViewAction()
         object Page {
             object Next : HomeViewAction()
+            object First : HomeViewAction()
         }
     }
     object Navigate{

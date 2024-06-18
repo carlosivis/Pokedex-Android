@@ -2,11 +2,13 @@ package dev.carlosivis.pokedex.feature.main.ui.home
 
 import androidx.lifecycle.ViewModel
 import dev.carlosivis.pokedex.core.delegate.useCase
+import dev.carlosivis.pokedex.domain.pokemon.model.PokemonPage
 import dev.carlosivis.pokedex.domain.pokemon.usecase.GetAllPokemonsUseCase
-import dev.carlosivis.pokedex.domain.pokemon.usecase.GetPokemonUseCase
-import dev.carlosivis.pokedex.feature.main.model.PokemonNameModel
+import dev.carlosivis.pokedex.domain.pokemon.usecase.GetPokemonsPageUseCase
 import dev.carlosivis.pokedex.feature.main.model.mapToModel
-import dev.carlosivis.pokedex.feature.main.ui.home.HomeViewAction.*
+import dev.carlosivis.pokedex.feature.main.ui.home.HomeViewAction.Set
+import dev.carlosivis.pokedex.feature.main.ui.home.HomeViewAction.Get
+import dev.carlosivis.pokedex.feature.main.ui.home.HomeViewAction.Navigate
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -19,6 +21,7 @@ class HomeViewModel(
     val state = _state.asStateFlow()
 
     private val getPokemonsUseCase: GetAllPokemonsUseCase by useCase()
+    private val getPokemonsPageUseCase: GetPokemonsPageUseCase by useCase()
 
     private fun setLoading(isLoading: Boolean) {
         _state.update { it.copy(isLoading = isLoading) }
@@ -27,19 +30,66 @@ class HomeViewModel(
     fun dispatchAction(action: HomeViewAction) {
         when (action) {
             is Navigate.Details -> navigation.navigateToDetails(action.pokemonId)
-            is HomeViewAction.Set.Loading -> setLoading(action.isLoading)
-            is Get.Page.Next -> { setLoading(true); getPokemons() }
+            is Set.Loading -> setLoading(action.isLoading)
+            is Get.Page.Next -> getNextPage()
             is Get.Pokemon -> getPokemons()
+            is Get.Page.First -> getFirstPage()
         }
     }
 
+
+    private fun getNextPage() {
+        dispatchAction(Set.Loading(true))
+        getPokemonsPageUseCase(
+            params = PokemonPage(
+                limit = 50,
+                offset = state.value.offset+50,
+            ),
+            onSuccess = { pokemons ->
+                _state.update {
+                    val pokelist = it.pokemons.toMutableList()
+                    pokelist.addAll(pokemons.results.mapToModel())
+                    it.copy(pokemons = pokelist,
+                        offset = state.value.offset+50)
+                }
+            dispatchAction(Set.Loading(false))
+            },
+            onFailure = { error ->
+                _state.update { it.copy(error = error) }
+                dispatchAction(Set.Loading(false))
+            }
+        )
+    }
+    private fun getFirstPage() {
+        dispatchAction(Set.Loading(true))
+        getPokemonsPageUseCase(
+            params = PokemonPage(
+                limit = 50,
+                offset = state.value.offset,
+            ),
+            onSuccess = { pokemons ->
+                _state.update {
+                    val pokelist = it.pokemons.toMutableList()
+                    pokelist.addAll(pokemons.results.mapToModel())
+                    it.copy(
+                        pokemons = pokelist,
+                        offset = state.value.offset)
+                }
+                dispatchAction(Set.Loading(false))
+            },
+            onFailure = { error ->
+                _state.update { it.copy(error = error) }
+                dispatchAction(Set.Loading(false))
+            }
+        )
+    }
     private fun getPokemons() {
         setLoading(true)
         getPokemonsUseCase(
             onSuccess = { pokemons ->
                 _state.update {
                     val pokelist = it.pokemons.toMutableList()
-                    pokelist.addAll(pokemons.mapToModel())
+                    pokelist.addAll(pokemons.results.mapToModel())
                     it.copy(pokemons = pokelist, isLoading = false)
                 }
             },

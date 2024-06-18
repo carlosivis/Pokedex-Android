@@ -16,7 +16,7 @@ import kotlinx.coroutines.delay
 fun SplashScreen(viewModel: SplashViewModel){
     Content()
     LaunchedEffect(Unit) {
-        delay(4000L)
+        delay(2000L)
         viewModel.dispatchAction(SplashViewAction.Navigate.Home)
     }
 }
