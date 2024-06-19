@@ -6,13 +6,10 @@ import dev.carlosivis.pokedex.core.commons.base.Either
 import dev.carlosivis.pokedex.core.commons.base.mapCatching
 import dev.carlosivis.pokedex.core.commons.base.runCatchSuspendData
 import dev.carlosivis.pokedex.data.remote.core.NetworkWrapper
-import dev.carlosivis.pokedex.data.remote.model.PokemonNameResponse
 import dev.carlosivis.pokedex.data.remote.model.PokemonPageResponse
 import dev.carlosivis.pokedex.data.remote.model.PokemonResponse
-import dev.carlosivis.pokedex.data.remote.model.mapToDomain
 import dev.carlosivis.pokedex.data.remote.service.PokemonService
 import dev.carlosivis.pokedex.domain.pokemon.model.PokemonDomain
-import dev.carlosivis.pokedex.domain.pokemon.model.PokemonNameDomain
 import dev.carlosivis.pokedex.domain.pokemon.model.PokemonPageDomain
 import dev.carlosivis.pokedex.repository.datasource.remote.PokemonRemoteDataSource
 
@@ -30,14 +27,14 @@ class PokemonRemoteDataSourceImpl(
         }
     }
 
-    override suspend fun getPokemon(id: Int): Either<PokemonDomain> {
+    override suspend fun getPokemon(id: String?): Either<PokemonDomain> {
         return runCatchSuspendData {
             val json = NetworkWrapper.getJson { service.getPokemon(id) }
             val  mapType = object : TypeToken<Map<String, PokemonDomain>>() {}.type
-            val pokemonSet: Map<String, PokemonResponse> = Gson().fromJson(json, mapType)
+            val pokemonSet: PokemonResponse = Gson().fromJson(json, mapType)
             pokemonSet
         }.mapCatching { map ->
-            map.values.first().mapToDomain()
+            map.mapToDomain()
         }
     }
 

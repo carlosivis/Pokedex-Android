@@ -4,7 +4,6 @@ import dev.carlosivis.pokedex.core.commons.base.Either
 import dev.carlosivis.pokedex.core.commons.base.onFailureSuspend
 import dev.carlosivis.pokedex.core.commons.base.onSuccessSuspend
 import dev.carlosivis.pokedex.domain.pokemon.model.PokemonDomain
-import dev.carlosivis.pokedex.domain.pokemon.model.PokemonNameDomain
 import dev.carlosivis.pokedex.domain.pokemon.model.PokemonPageDomain
 import dev.carlosivis.pokedex.domain.pokemon.repository.PokemonRepository
 import dev.carlosivis.pokedex.repository.datasource.remote.PokemonRemoteDataSource
@@ -26,7 +25,7 @@ internal class PokemonRepositoryImpl (
             }
     }
 
-    override suspend fun getPokemon(id: Int): Flow<Either<PokemonDomain>> = flow {
+    override suspend fun getPokemon(id: String?): Flow<Either<PokemonDomain>> = flow {
         remote.getPokemon(id)
             .onSuccessSuspend {
                 emit(Either.Success(it))

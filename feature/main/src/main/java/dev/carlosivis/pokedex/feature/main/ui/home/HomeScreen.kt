@@ -3,6 +3,8 @@ package dev.carlosivis.pokedex.feature.main.ui.home
 import LazyGridPaging
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,7 +25,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -34,6 +35,7 @@ import coil.compose.AsyncImage
 import dev.carlosivis.pokedex.feature.main.model.PokemonNameModel
 import dev.carlosivis.pokedex.feature.main.ui.home.HomeViewAction.Get
 import dev.carlosivis.pokedex.feature.main.ui.home.HomeViewAction.Navigate
+import java.util.Locale
 
 
 @Composable
@@ -75,13 +77,17 @@ fun PokemonNameCard(
     onClick: () -> Unit
 ) {
     var dominantColor by remember { mutableStateOf(Color.Transparent) }
+    val animatedColor by animateColorAsState(
+        targetValue = dominantColor,
+        animationSpec = tween(durationMillis = 2500))
+
 
 
     Button (
         modifier = Modifier
             .fillMaxWidth().padding(8.dp),
         shape = RoundedCornerShape(32.dp),
-        colors = ButtonDefaults.buttonColors(backgroundColor = dominantColor) ,
+        colors = ButtonDefaults.buttonColors(backgroundColor = animatedColor) ,
         onClick = {onClick()}
     ) {
         Column (
@@ -109,7 +115,8 @@ fun PokemonNameCard(
             Text(
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.ExtraBold,
-                text = data.name)
+                text = data.name.replaceFirstChar {it.uppercase(Locale.getDefault())},
+            )
         }
 
     }

@@ -1,5 +1,6 @@
 package dev.carlosivis.pokedex.feature.main.ui.details
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -26,5 +27,15 @@ fun DetailsScreen(
 private fun Content(
     state: DetailsViewState,
     action: (DetailsViewAction) -> Unit){
-    TODO()
+
+    Column(){
+
     }
+}
+
+@Composable
+private fun PokemonDetail(
+    pokemon: PokemonModel) {
+
+
+}

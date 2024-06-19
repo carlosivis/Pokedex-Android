@@ -2,7 +2,6 @@ package dev.carlosivis.pokedex.data.remote.service
 
 import okhttp3.ResponseBody
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface PokemonService {
@@ -18,6 +17,6 @@ interface PokemonService {
 
     @GET("/pokemon/")
     suspend fun getPokemon(
-        @Query("id") id: Int
+        @Query("id") id: String?
     ): ResponseBody
 }

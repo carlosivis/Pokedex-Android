@@ -65,7 +65,7 @@ class HomeViewModel(
         getPokemonsPageUseCase(
             params = PokemonPage(
                 limit = 50,
-                offset = state.value.offset,
+                offset = 0,
             ),
             onSuccess = { pokemons ->
                 _state.update {
@@ -73,7 +73,7 @@ class HomeViewModel(
                     pokelist.addAll(pokemons.results.mapToModel())
                     it.copy(
                         pokemons = pokelist,
-                        offset = state.value.offset)
+                        offset = 0)
                 }
                 dispatchAction(Set.Loading(false))
             },

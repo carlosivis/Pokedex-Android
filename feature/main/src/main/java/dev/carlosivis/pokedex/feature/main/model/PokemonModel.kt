@@ -28,6 +28,10 @@ data class PokemonModel(
             stats = stats.map { it.mapToDomain() }
         )
     }
+    fun getImageUrl(): String {
+        return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/" +
+                "pokemon/other/official-artwork/$id.png"
+    }
 }
 
 @Parcelize
@@ -63,4 +67,34 @@ data class PokemonStat(
             baseStat = baseStat
         )
     }
+
+}
+
+internal fun PokemonTypeDomain.mapToModel(): PokemonType {
+    return PokemonType(
+        name = name
+    )
+}
+internal fun PokemonAbilityDomain.mapToModel(): PokemonAbility {
+    return PokemonAbility(
+        name = name
+    )
+}
+internal fun PokemonStatDomain.mapToModel(): PokemonStat {
+    return PokemonStat(
+        name = name,
+        baseStat = baseStat
+    )
+}
+
+internal fun PokemonDomain.mapToModel(): PokemonModel{
+    return PokemonModel(
+        id = id,
+        name = name,
+        height = height,
+        weight = weight,
+        types = types.map { it.mapToModel() },
+        abilities = abilities.map{ it.mapToModel() },
+        stats = stats.map { it.mapToModel() }
+    )
 }
