@@ -18,6 +18,7 @@ okhttp3 = "4.12.0"
 retrofit = "2.11.0"
 coil = "2.6.0"
 lifecycleViewmodelKtx = "2.8.1"
+paletteKtx = "1.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidxCore" }
@@ -52,6 +53,7 @@ androidx-navigation = { group = "androidx.navigation", name = "navigation-compos
 androidx-navigation-common-ktx = { group = "androidx.navigation", name = "navigation-common-ktx", version.ref = "androidxNavigationKtx" }
 coil-compose = {group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
+androidx-palette-ktx = { group = "androidx.palette", name = "palette-ktx", version.ref = "paletteKtx" }
 
 
 [plugins]
