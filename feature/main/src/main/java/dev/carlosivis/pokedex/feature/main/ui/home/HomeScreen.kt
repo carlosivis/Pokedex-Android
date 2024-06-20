@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -32,6 +34,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.palette.graphics.Palette
 import coil.compose.AsyncImage
+import dev.carlosivis.pokedex.feature.main.R
 import dev.carlosivis.pokedex.feature.main.model.PokemonNameModel
 import dev.carlosivis.pokedex.feature.main.ui.home.HomeViewAction.Get
 import dev.carlosivis.pokedex.feature.main.ui.home.HomeViewAction.Navigate
@@ -82,7 +85,6 @@ fun PokemonNameCard(
         animationSpec = tween(durationMillis = 2500))
 
 
-
     Button (
         modifier = Modifier
             .fillMaxWidth().padding(8.dp),
@@ -99,9 +101,7 @@ fun PokemonNameCard(
             AsyncImage(
                 model = data.getImageUrl(),
                 contentDescription = null,
-                modifier = Modifier.height(130.dp),
-                placeholder = painterResource(
-                    id = dev.carlosivis.pokedex.core.uikit.R.drawable.pokemon_placeholder),
+                modifier = Modifier.height(130.dp).background(Color.Transparent),
                 onSuccess = { successResult ->
                     val originalBitmap = (successResult.result.drawable as BitmapDrawable).bitmap
                     val softwareBitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, false)

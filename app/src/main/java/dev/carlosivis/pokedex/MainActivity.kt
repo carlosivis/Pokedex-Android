@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity(),KoinComponent {
 
             PokedexTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize().padding(top = 8.dp),
+                    modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
                     AppNavigation(navController = navController)
