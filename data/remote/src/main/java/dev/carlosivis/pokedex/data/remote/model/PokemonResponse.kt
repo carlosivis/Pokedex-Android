@@ -2,14 +2,13 @@ package dev.carlosivis.pokedex.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 import dev.carlosivis.pokedex.core.commons.extension.Empty
-import dev.carlosivis.pokedex.domain.pokemon.model.PokemonAbilityDomain
 import dev.carlosivis.pokedex.domain.pokemon.model.PokemonDomain
 import dev.carlosivis.pokedex.domain.pokemon.model.PokemonStatDomain
 import dev.carlosivis.pokedex.domain.pokemon.model.PokemonTypeDomain
 
 internal data class PokemonResponse(
     @SerializedName("id")
-    val id:Int? = null,
+    val id:String? = null,
     @SerializedName("name")
     val name:String? = null,
     @SerializedName("height")
@@ -17,16 +16,16 @@ internal data class PokemonResponse(
     @SerializedName("weight")
     val weight:Int? = null,
     @SerializedName("types")
-    val types:List<PokemonTypeResponse>? = null,
+    val types:List<PokemonTypesResponse>? = null,
     @SerializedName("abilities")
-    val abilities:List<PokemonAbilityResponse>? = null,
+    val abilities:List<PokemonAbilitiesResponse>? = null,
     @SerializedName("stats")
-    val stats:List<PokemonStatResponse>? = null
+    val stats:List<PokemonStatsResponse>? = null
 ) {
 
     fun mapToDomain(): PokemonDomain{
         return PokemonDomain(
-            id = id ?: 0,
+            id = id ?: String.Empty,
             name = name ?: String.Empty,
             height = height ?: 0,
             weight = weight ?: 0,
@@ -37,39 +36,5 @@ internal data class PokemonResponse(
     }
 }
 
-internal data class PokemonTypeResponse(
-    @SerializedName("type")
-    val name:String? = null
-) {
-    fun mapToDomain(): PokemonTypeDomain {
-        return PokemonTypeDomain(
-            name = name ?: String.Empty
-        )
-    }
-}
 
-internal data class PokemonAbilityResponse(
-    @SerializedName("name")
-    val name:String? = null
-) {
-    fun mapToDomain(): PokemonAbilityDomain {
-        return PokemonAbilityDomain(
-            name = name ?: String.Empty
-        )
-    }
-}
 
-internal data class PokemonStatResponse(
-    @SerializedName("stat")
-    val name:String? = null,
-    @SerializedName("baseStat")
-    val baseStat:Int? = null
-){
-    fun mapToDomain(): PokemonStatDomain {
-        return PokemonStatDomain(
-            name = name ?: String.Empty,
-            baseStat = baseStat ?: 0
-        )
-
-    }
-}

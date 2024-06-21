@@ -31,7 +31,7 @@ class PokemonRemoteDataSourceImpl(
         return runCatchSuspendData {
             val json = NetworkWrapper.getJson { service.getPokemon(id) }
             val  mapType = object : TypeToken<Map<String, PokemonDomain>>() {}.type
-            val pokemonSet: PokemonResponse = Gson().fromJson(json, mapType)
+            val pokemonSet: PokemonResponse = Gson().fromJson(json, PokemonResponse::class.java)
             pokemonSet
         }.mapCatching { map ->
             map.mapToDomain()
