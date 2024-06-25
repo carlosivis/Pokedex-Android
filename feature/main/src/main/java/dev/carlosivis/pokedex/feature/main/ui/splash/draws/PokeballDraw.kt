@@ -1,138 +1,89 @@
-package dev.carlosivis.pokedex.feature.main.ui.splash.draws
-
-import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.DrawScope
-import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.drawscope.rotate
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
-@Preview
 @Composable
-fun Pokeball() {
-    val sizedp = 300.dp
-    val sizepx = with(LocalDensity.current) { sizedp.toPx() }
-    Box(
-        modifier = Modifier
-            .padding(32.dp)
-            .wrapContentSize()
-    ) {
-        val blackLineColor = Color.Black
-        val strokeWidth = sizepx * .04f
-        val outterBallPercentage = .25.toFloat()
-        val innerBallPercentage = .17.toFloat()
-        val innerestBallPercentage = .10.toFloat()
+fun PokeballLoadingAnimation(isLoading: Boolean) {
+    if (isLoading) {
+        val infiniteTransition = rememberInfiniteTransition()
+        val rotation by infiniteTransition.animateFloat(
+            initialValue = 0f,
+            targetValue = 360f,
+            animationSpec = infiniteRepeatable(
+                animation = tween(durationMillis = 1000, easing = LinearEasing),
+                repeatMode = RepeatMode.Restart
+            )
+        )
+
         Box(
-            modifier = Modifier
-                .width(sizedp)
-                .height(sizedp)
+            contentAlignment = Alignment.Center,
+            modifier = Modifier.fillMaxSize()
         ) {
             Canvas(
                 modifier = Modifier
-                    .fillMaxSize()
+                    .size(164.dp)
+                    .rotate(rotation)
             ) {
+                val canvasWidth = size.width
+                val canvasHeight = size.height
 
+                // Draw the top half (red)
                 drawArc(
-                    brush = Brush.linearGradient(listOf(Color.White, Color.White)),
-                    startAngle = 0f,
-                    sweepAngle = 180f, // * animateFloat.value,
-                    useCenter = false
-                )
-                drawArc(
-                    brush = Brush.linearGradient(listOf(Color.Red, Color.Red)),
+                    color = Color.Red,
                     startAngle = 180f,
-                    sweepAngle = 180f, // * animateFloat.value,
-                    useCenter = false
+                    sweepAngle = 180f,
+                    useCenter = true,
+                    topLeft = Offset.Zero,
+                    size = size
                 )
+
+                // Draw the bottom half (white)
                 drawArc(
-                    color = blackLineColor,
+                    color = Color.White,
                     startAngle = 0f,
-                    sweepAngle = 360f, // * animateFloat.value,
-                    useCenter = false,
-                    style = Stroke(strokeWidth)
+                    sweepAngle = 180f,
+                    useCenter = true,
+                    topLeft = Offset.Zero,
+                    size = size
                 )
 
+                // Draw the center black line
                 drawLine(
-                    color = blackLineColor,
-                    start = Offset(
-                        x = 0f,
-                        y = (size.height / 2)
-                    ),
-                    end = Offset(
-                        x = size.width,
-                        y = (size.height / 2)
-                    ),
-                    strokeWidth = strokeWidth
-
+                    color = Color.Black,
+                    start = Offset(0f, canvasHeight / 2),
+                    end = Offset(canvasWidth, canvasHeight / 2),
+                    strokeWidth = 4.dp.toPx()
                 )
-                val outterBallSizePx = sizepx * outterBallPercentage
+
+                // Draw the outer circle in the center
                 drawCircle(
                     color = Color.Black,
-                    radius = outterBallSizePx / 2,
+                    radius = canvasWidth / 6,
+                    center = Offset(canvasWidth / 2, canvasHeight / 2)
                 )
 
-                val innerBallSizePx = sizepx * innerBallPercentage
+                // Draw the inner white circle in the center
                 drawCircle(
                     color = Color.White,
-                    radius = innerBallSizePx / 2,
+                    radius = canvasWidth / 10,
+                    center = Offset(canvasWidth / 2, canvasHeight / 2)
                 )
-
-                val innerestBallSizePx = sizepx * innerestBallPercentage
-                val innerestBallMarginPx = ((sizepx - innerestBallSizePx) / 2)
-                drawArc(
-                    color = Color.LightGray,
-                    startAngle = 0f,
-                    sweepAngle = 360f, // * animateFloat.value,
-                    useCenter = false,
-                    topLeft = Offset(
-                        x = innerestBallMarginPx,
-                        y = innerestBallMarginPx,
-                    ),
-                    size = Size(
-                        width = innerestBallSizePx,
-                        height = innerestBallSizePx,
-                    ),
-                    style = Stroke(4f)
-                )
-
             }
         }
     }
-}
-
-@Composable
-fun RotatingPokeBall(modifier : Modifier = Modifier) {
-    var rotation by remember { mutableFloatStateOf(0f) }
-    val animatedRotation by animateFloatAsState(
-        targetValue = rotation,
-        animationSpec = tween(durationMillis = 1000)
-    )
-
-    LaunchedEffect(key1 = Unit) {
-        rotation += 360f
-    }
-
-    Pokeball()
 }

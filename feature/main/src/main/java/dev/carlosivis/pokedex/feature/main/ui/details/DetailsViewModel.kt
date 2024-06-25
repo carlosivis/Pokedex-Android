@@ -38,14 +38,15 @@ class DetailsViewModel(
         if (id == null) {
             _state.update { it.copy(pokemon = null) }
         } else{
+            setLoading(true)
             getPokemonUseCase(
                 params = PokemonInfoDomain(id),
                 onSuccess = { pokemon ->
                     _state.update {
-                        it.copy(pokemon =  pokemon.mapToModel()) }
+                        it.copy(pokemon =  pokemon.mapToModel(),isLoading = false) }
                 },
                 onFailure = { error ->
-                    _state.update { it.copy(error = error) }
+                    _state.update { it.copy(error = error,isLoading = false) }
                 }
             )
         }

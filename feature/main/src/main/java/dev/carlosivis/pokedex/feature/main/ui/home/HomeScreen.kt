@@ -1,6 +1,7 @@
 package dev.carlosivis.pokedex.feature.main.ui.home
 
 import LazyGridPaging
+import PokeballLoadingAnimation
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import androidx.compose.animation.animateColorAsState
@@ -37,7 +38,7 @@ import java.util.Locale
 
 
 @Composable
-fun HomeScreen(viewModel: HomeViewModel){
+fun HomeScreen(viewModel: HomeViewModel) {
     val state by viewModel.state.collectAsState()
     val action = viewModel::dispatchAction
     Content(state = state, action = viewModel::dispatchAction)
@@ -49,7 +50,8 @@ fun HomeScreen(viewModel: HomeViewModel){
 @Composable
 private fun Content(
     state: HomeViewState,
-    action: (HomeViewAction) -> Unit) {
+    action: (HomeViewAction) -> Unit
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -57,12 +59,15 @@ private fun Content(
             .padding(horizontal = 16.dp)
     ) {
 
+
+        PokeballLoadingAnimation(state.isLoading)
+
         LazyGridPaging(
             modifier = Modifier.weight(1f),
             items = state.pokemons,
-            requestNewPage = { action(Get.Page.Next)},
+            requestNewPage = { action(Get.Page.Next) },
             itemContent = {
-                PokemonNameCard(it){action(Navigate.Details(it.name))}
+                PokemonNameCard(it) { action(Navigate.Details(it.name)) }
             }
         )
     }
@@ -77,7 +82,8 @@ fun PokemonNameCard(
     var dominantColor by remember { mutableStateOf(Color.Transparent) }
     val animatedColor by animateColorAsState(
         targetValue = dominantColor,
-        animationSpec = tween(durationMillis = 2500)
+        animationSpec = tween(durationMillis = 1500),
+
     )
 
     Button(
@@ -90,7 +96,6 @@ fun PokemonNameCard(
     ) {
         Column(
             modifier = Modifier
-                .fillMaxWidth()
                 .padding(all = 2.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -131,7 +136,11 @@ fun PokemonImage(
 @Preview(showBackground = true)
 @Composable
 fun PokemonNameCardPreview() {
-    PokemonNameCard(data = PokemonNameModel(name = "Bulbasaur", url = "https://example.com/image.jpg"), onClick = {})
+    PokemonNameCard(
+        data = PokemonNameModel(
+            name = "Bulbasaur",
+            url = "https://example.com/image.jpg"
+        ), onClick = {})
 }
 
 

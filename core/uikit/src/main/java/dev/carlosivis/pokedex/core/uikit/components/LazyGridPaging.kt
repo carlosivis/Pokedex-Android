@@ -21,7 +21,7 @@ fun <T> LazyGridPaging(
     itemContent: @Composable LazyGridItemScope.(item: T) -> Unit,
     modifier: Modifier = Modifier,
     state: LazyGridState = rememberLazyGridState(),
-    itemCount: Int = 30,
+    itemCount: Int = 10,
     itemsPerPage: Int = 50
 ) {
     var lastIndexViewed by remember { mutableIntStateOf(0) }

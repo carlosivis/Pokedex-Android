@@ -1,6 +1,6 @@
 package dev.carlosivis.pokedex.feature.main.ui.splash
 
-import android.window.SplashScreen
+import PokeballLoadingAnimation
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,11 +9,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import dev.carlosivis.pokedex.feature.main.ui.splash.draws.RotatingPokeBall
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen(viewModel: SplashViewModel){
+fun SplashScreen(viewModel: SplashViewModel) {
     Content()
     LaunchedEffect(Unit) {
         delay(2000L)
@@ -29,7 +28,8 @@ private fun Content() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        RotatingPokeBall()
+        PokeballLoadingAnimation(true)
+
     }
 }
 

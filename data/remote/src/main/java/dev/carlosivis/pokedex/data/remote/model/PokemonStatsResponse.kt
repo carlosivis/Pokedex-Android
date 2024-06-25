@@ -8,7 +8,7 @@ import dev.carlosivis.pokedex.domain.pokemon.model.PokemonStatsDomain
 internal data class PokemonStatsResponse(
     @SerializedName("stat")
     val stat:PokemonStatResponse? = null,
-    @SerializedName("baseStat")
+    @SerializedName("base_stat")
     val baseStat:Int? = null
 ){
     fun mapToDomain(): PokemonStatsDomain {

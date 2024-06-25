@@ -47,11 +47,15 @@ class HomeViewModel(
             ),
             onSuccess = { pokemons ->
                 _state.update {
-                    val pokelist = it.pokemons.toMutableList()
-                    pokelist.addAll(pokemons.results.mapToModel())
-                    it.copy(pokemons = pokelist,
-                        offset = state.value.offset+50)
-                }
+                    val currentPokemons = it.pokemons.toMutableList()
+                    val newPokemons = pokemons.results.mapToModel().filter { newPokemon ->
+                        !currentPokemons.any { currentPokemon -> currentPokemon.name == newPokemon.name }
+                    }
+                    currentPokemons.addAll(newPokemons)
+                    it.copy(
+                        pokemons = currentPokemons,
+                        offset = state.value.offset + 50
+                    )}
             dispatchAction(Set.Loading(false))
             },
             onFailure = { error ->
