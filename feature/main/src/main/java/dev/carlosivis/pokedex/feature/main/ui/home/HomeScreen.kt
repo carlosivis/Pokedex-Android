@@ -1,11 +1,8 @@
 package dev.carlosivis.pokedex.feature.main.ui.home
 
 import LazyGridPaging
-import PokeballLoadingAnimation
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
-import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,6 +28,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.palette.graphics.Palette
 import coil.compose.AsyncImage
+import com.google.accompanist.placeholder.PlaceholderHighlight
+import com.google.accompanist.placeholder.material.shimmer
+import com.google.accompanist.placeholder.placeholder
 import dev.carlosivis.pokedex.feature.main.model.PokemonNameModel
 import dev.carlosivis.pokedex.feature.main.ui.home.HomeViewAction.Get
 import dev.carlosivis.pokedex.feature.main.ui.home.HomeViewAction.Navigate
@@ -60,7 +60,7 @@ private fun Content(
     ) {
 
 
-        PokeballLoadingAnimation(state.isLoading)
+        //PokeballLoadingAnimation(state.isLoading)
 
         LazyGridPaging(
             modifier = Modifier.weight(1f),
@@ -80,18 +80,20 @@ fun PokemonNameCard(
     onClick: () -> Unit
 ) {
     var dominantColor by remember { mutableStateOf(Color.Transparent) }
-    val animatedColor by animateColorAsState(
-        targetValue = dominantColor,
-        animationSpec = tween(durationMillis = 1500),
-
-    )
+    var isLoading by remember { mutableStateOf(true) }
 
     Button(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
+            .padding(8.dp)
+            .placeholder(
+                visible = isLoading,
+                highlight = PlaceholderHighlight.shimmer(),
+                color = Color.LightGray,
+                shape = RoundedCornerShape(32.dp)
+            ),
         shape = RoundedCornerShape(32.dp),
-        colors = ButtonDefaults.buttonColors(backgroundColor = animatedColor),
+        colors = ButtonDefaults.buttonColors(backgroundColor = dominantColor),
         onClick = { onClick() }
     ) {
         Column(
@@ -101,6 +103,7 @@ fun PokemonNameCard(
         ) {
             PokemonImage(data.getImageUrl()) { color ->
                 dominantColor = color
+                isLoading = false
             }
             Text(
                 textAlign = TextAlign.Center,
@@ -116,6 +119,7 @@ fun PokemonImage(
     imageUrl: String,
     onColorExtracted: (Color) -> Unit
 ) {
+
     AsyncImage(
         model = imageUrl,
         contentDescription = null,

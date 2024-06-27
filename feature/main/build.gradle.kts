@@ -44,6 +44,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.palette.ktx)
+    implementation(libs.accompanist.placeholder)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

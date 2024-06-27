@@ -19,6 +19,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -27,9 +28,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import dev.carlosivis.pokedex.core.uikit.theme.Colors.attributes
+import dev.carlosivis.pokedex.feature.main.model.PokemonModel
 import dev.carlosivis.pokedex.feature.main.model.PokemonStats
 import dev.carlosivis.pokedex.feature.main.model.PokemonType
 import dev.carlosivis.pokedex.feature.main.util.getTypeColor
@@ -64,7 +69,7 @@ private fun Content(
         AsyncImage(
                 modifier = Modifier.height(400.dp),
                 model = state.pokemon?.getImageUrl(),
-                contentDescription = null
+                contentDescription = null,
             )
         Spacer(modifier = Modifier.height(8.dp))
         LazyRow(
@@ -80,10 +85,12 @@ private fun Content(
         }
         Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = state.pokemon?.name ?: "",
+            text = state.pokemon?.name?.replaceFirstChar { it.uppercase() } ?: "",
             style = MaterialTheme.typography.h4,
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
+        Spacer(modifier = Modifier.height(8.dp))
+        PokemonSize(state.pokemon?.copy())
         Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = "Stats Base",
@@ -91,22 +98,56 @@ private fun Content(
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
         Spacer(modifier = Modifier.height(8.dp))
-        state.pokemon?.stats?.forEach {
+        state.pokemon?.stats?.filter { it.stat.name in attributes }
+        ?.forEach {
             PokemonStatRow(it)
+            Spacer(modifier = Modifier.height(8.dp))
         }
     }
 }
 
 @Composable
+private fun PokemonSize(pokemon: PokemonModel?){
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp),
+        horizontalArrangement = Arrangement.SpaceEvenly,
+        verticalAlignment = Alignment.CenterVertically
+    ){
+        Column(horizontalAlignment = Alignment.CenterHorizontally){
+            Text(
+                text = "${pokemon?.height} M",
+                style = MaterialTheme.typography.h6,
+                fontSize = 38.sp,
+                color = Color.Gray
+            )
+            Text(
+                text = "Height",
+                style = MaterialTheme.typography.h6,
+                color = Color.LightGray
+            )
+        }
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(
+                text = "${pokemon?.weight} Kg",
+                style = MaterialTheme.typography.h6,
+                fontSize = 38.sp,
+                color = Color.Gray
+            )
+            Text(
+                text = "Weight",
+                style = MaterialTheme.typography.h6,
+                color = Color.LightGray
+            )
+        }
+    }
+}
+@Composable
 private fun PokemonStatRow(stat: PokemonStats) {
     val progress = stat.baseStat / 200f
-    val color = when (stat.stat.name) {
-        "hp" -> Color(0xFFFFC1C1) // Suave vermelho pastel
-        "attack" -> Color(0xFFFFE4B5) // Suave laranja pastel
-        "defense" -> Color(0xFFADD8E6) // Suave azul pastel
-        "speed" -> Color(0xFF98FB98)
-        else -> Color.Gray
-    }
+    val color = attributes[stat.stat.name] ?: Color.Gray
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -115,29 +156,37 @@ private fun PokemonStatRow(stat: PokemonStats) {
             .padding(vertical = 4.dp)
     ) {
         Text(
-            text = stat.stat.name,
+            text = stat.stat.name.uppercase(),
             style = MaterialTheme.typography.body1,
             modifier = Modifier.weight(1f)
         )
         Spacer(modifier = Modifier.width(8.dp))
-        Box(
+        Surface(
+            shape = RoundedCornerShape(12.dp),
+            elevation = 8.dp,
             modifier = Modifier
                 .weight(3f)
-                .height(24.dp)
-                .background(color.copy(alpha = 0.3f), shape = RoundedCornerShape(12.dp))
-        ) {
+                .height(24.dp)) {
             Box(
                 modifier = Modifier
-                    .fillMaxHeight()
-                    .fillMaxWidth(progress)
-                    .background(color, shape = RoundedCornerShape(12.dp))
+                    .weight(3f)
+                    .height(24.dp)
+                    .background(color.copy(alpha = 0.3f), shape = RoundedCornerShape(12.dp))
             ) {
-                Text(
-                    text = stat.baseStat.toString(),
-                    style = MaterialTheme.typography.body2,
-                    modifier = Modifier.align(Alignment.Center),
-                    color = Color.White
-                )
+                Box(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .fillMaxWidth(progress)
+                        .background(color, shape = RoundedCornerShape(12.dp))
+                ) {
+                    Text(
+                        text = stat.baseStat.toString(),
+                        style = MaterialTheme.typography.body2,
+                        fontWeight = FontWeight.ExtraBold,
+                        modifier = Modifier.align(Alignment.Center),
+                        color = Color.White
+                    )
+                }
             }
         }
     }
