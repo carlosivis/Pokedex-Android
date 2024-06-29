@@ -20,7 +20,6 @@ class HomeViewModel(
     private val _state = MutableStateFlow(HomeViewState())
     val state = _state.asStateFlow()
 
-    private val getPokemonsUseCase: GetAllPokemonsUseCase by useCase()
     private val getPokemonsPageUseCase: GetPokemonsPageUseCase by useCase()
 
     private fun setLoading(isLoading: Boolean) {
@@ -32,7 +31,6 @@ class HomeViewModel(
             is Navigate.Details -> navigation.navigateToDetails(action.pokemonId)
             is Set.Loading -> setLoading(action.isLoading)
             is Get.Page.Next -> getNextPage()
-            is Get.Pokemon -> getPokemons()
             is Get.Page.First -> getFirstPage()
         }
     }
@@ -84,21 +82,6 @@ class HomeViewModel(
             onFailure = { error ->
                 _state.update { it.copy(error = error) }
                 dispatchAction(Set.Loading(false))
-            }
-        )
-    }
-    private fun getPokemons() {
-        setLoading(true)
-        getPokemonsUseCase(
-            onSuccess = { pokemons ->
-                _state.update {
-                    val pokelist = it.pokemons.toMutableList()
-                    pokelist.addAll(pokemons.results.mapToModel())
-                    it.copy(pokemons = pokelist, isLoading = false)
-                }
-            },
-            onFailure = { error ->
-                _state.update { it.copy(error = error) }
             }
         )
     }

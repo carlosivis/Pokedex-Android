@@ -5,7 +5,6 @@ import dev.carlosivis.pokedex.feature.main.model.PokemonNameModel
 sealed class HomeViewAction {
 
     object Get {
-        object Pokemon : HomeViewAction()
         object Page {
             object Next : HomeViewAction()
             object First : HomeViewAction()
