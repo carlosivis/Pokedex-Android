@@ -9,13 +9,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreen(viewModel: SplashViewModel) {
     Content()
     LaunchedEffect(Unit) {
-        delay(2000L)
         viewModel.dispatchAction(SplashViewAction.Navigate.Home)
     }
 }

@@ -59,9 +59,6 @@ private fun Content(
             .padding(horizontal = 16.dp)
     ) {
 
-
-        //PokeballLoadingAnimation(state.isLoading)
-
         LazyGridPaging(
             modifier = Modifier.weight(1f),
             items = state.pokemons,

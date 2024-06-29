@@ -3,7 +3,6 @@ package dev.carlosivis.pokedex.feature.main.ui.home
 import androidx.lifecycle.ViewModel
 import dev.carlosivis.pokedex.core.delegate.useCase
 import dev.carlosivis.pokedex.domain.pokemon.model.PokemonPage
-import dev.carlosivis.pokedex.domain.pokemon.usecase.GetAllPokemonsUseCase
 import dev.carlosivis.pokedex.domain.pokemon.usecase.GetPokemonsPageUseCase
 import dev.carlosivis.pokedex.feature.main.model.mapToModel
 import dev.carlosivis.pokedex.feature.main.ui.home.HomeViewAction.Set
@@ -40,8 +39,8 @@ class HomeViewModel(
         dispatchAction(Set.Loading(true))
         getPokemonsPageUseCase(
             params = PokemonPage(
-                limit = 50,
-                offset = state.value.offset+50,
+                limit = 30,
+                offset = state.value.offset+30,
             ),
             onSuccess = { pokemons ->
                 _state.update {
@@ -52,7 +51,7 @@ class HomeViewModel(
                     currentPokemons.addAll(newPokemons)
                     it.copy(
                         pokemons = currentPokemons,
-                        offset = state.value.offset + 50
+                        offset = state.value.offset + 30
                     )}
             dispatchAction(Set.Loading(false))
             },
@@ -66,7 +65,7 @@ class HomeViewModel(
         dispatchAction(Set.Loading(true))
         getPokemonsPageUseCase(
             params = PokemonPage(
-                limit = 50,
+                limit = 30,
                 offset = 0,
             ),
             onSuccess = { pokemons ->
