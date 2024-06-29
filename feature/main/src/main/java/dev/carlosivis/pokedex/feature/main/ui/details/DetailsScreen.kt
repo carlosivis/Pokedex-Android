@@ -87,7 +87,7 @@ private fun Content(
         Text(
             text = state.pokemon?.name?.replaceFirstChar { it.uppercase() } ?: "",
             style = MaterialTheme.typography.h4,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
+            modifier = Modifier.align(Alignment.CenterHorizontally),
         )
         Spacer(modifier = Modifier.height(8.dp))
         PokemonSize(state.pokemon?.copy())

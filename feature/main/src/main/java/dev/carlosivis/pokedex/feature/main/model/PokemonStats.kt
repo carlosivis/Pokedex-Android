@@ -17,6 +17,13 @@ data class PokemonStats(
             baseStat = baseStat
         )
     }
+
+    companion object {
+        val mock = PokemonStats(
+            stat = PokemonStat.mock,
+            baseStat = 10
+        )
+    }
 }
 @Parcelize
 data class PokemonStat(
@@ -27,6 +34,13 @@ data class PokemonStat(
         return PokemonStatDomain(
             name = name,
             url = url
+        )
+    }
+
+    companion object {
+        val mock = PokemonStat(
+            name = "HP",
+            url = "example.com"
         )
     }
 

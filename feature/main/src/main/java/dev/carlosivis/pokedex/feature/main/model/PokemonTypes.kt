@@ -18,6 +18,13 @@ data class PokemonTypes(
         )
     }
 
+    companion object {
+        val mock = PokemonTypes(
+            slot = 1,
+            type = PokemonType.mock
+        )
+    }
+
 }
 
 @Parcelize
@@ -29,6 +36,12 @@ data class PokemonType(
         return PokemonTypeDomain(
             name = name,
             url = url
+        )
+    }
+    companion object {
+        val mock = PokemonType(
+            name = "grass",
+            url = "example.com"
         )
     }
 }

@@ -51,4 +51,9 @@ class DetailsViewModel(
             )
         }
     }
+
+    public override fun onCleared() {
+        super.onCleared()
+        getPokemonUseCase.cancel()
+    }
 }

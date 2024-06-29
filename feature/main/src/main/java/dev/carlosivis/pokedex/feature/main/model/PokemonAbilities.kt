@@ -18,6 +18,14 @@ data class PokemonAbilities(
             slot = slot
         )
     }
+
+    companion object {
+        val mock =  PokemonAbilities(
+            ability = PokemonAbility.mock,
+            isHidden = false,
+            slot = 1
+        )
+    }
 }
 
 @Parcelize
@@ -29,6 +37,13 @@ data class PokemonAbility(
         return PokemonAbilityDomain(
             name = name,
             url = url
+        )
+    }
+
+    companion object {
+        val mock = PokemonAbility(
+            name = "mock",
+            url = "example.com"
         )
     }
 }
