@@ -12,7 +12,7 @@ import org.koin.androidx.compose.getViewModel
 internal fun NavGraphBuilder.addMainGraph(){
     navigation(
         route = MainRoutes.branch.route,
-        startDestination = MainRoutes.Splash.createRoute()
+        startDestination = MainRoutes.Home.createRoute()
     ){
         addHomeScreen()
         addDetailsScreen()

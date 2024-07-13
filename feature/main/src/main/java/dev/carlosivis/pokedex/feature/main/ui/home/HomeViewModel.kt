@@ -39,8 +39,8 @@ class HomeViewModel(
         dispatchAction(Set.Loading(true))
         getPokemonsPageUseCase(
             params = PokemonPage(
-                limit = 30,
-                offset = state.value.offset+30,
+                limit = 50,
+                offset = state.value.offset+50,
             ),
             onSuccess = { pokemons ->
                 _state.update {
