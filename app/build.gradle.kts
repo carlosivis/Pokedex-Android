@@ -1,25 +1,24 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    alias(libs.plugins.androidApplication)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
-    alias(libs.plugins.compose.compiler)
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+    id("dev.carlosivis.android.compose")
+    id("com.google.gms.google-services")
+
 }
+true
 
 android {
-    namespace = "dev.carlosivis.pokedex"
-    compileSdk = 34
-
+    namespace = "dev.carlosivis.pokedex.app"
     defaultConfig {
-        applicationId = "dev.carlosivis.pokedex"
+        applicationId = "dev.carlosivis.pokedex.app"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
-        multiDexEnabled = true
+        vectorDrawables.useSupportLibrary = true
     }
 
     compileOptions {
@@ -32,8 +31,21 @@ android {
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+
+    packagingOptions{
+        resources.excludes.add("META-INF/atomicfu.kotlin_module")
+        resources.excludes.add("META-INF/DEPENDENCIES")
+        resources.excludes.add("META-INF/LICENSE")
+        resources.excludes.add("META-INF/LICENSE.txt")
+        resources.excludes.add("META-INF/LICENSE.md")
+        resources.excludes.add("META-INF/LICENSE-notice.md")
+        resources.excludes.add("META-INF/license.txt")
+        resources.excludes.add("META-INF/NOTICE")
+        resources.excludes.add("META-INF/NOTICE.txt")
+        resources.excludes.add("META-INF/notice.txt")
+        resources.excludes.add("META-INF/ASL2.0")
+        resources.excludes.add("META-INF/AL2.0,LGPL2.1")
+        resources.excludes.add("META-INF/LGPL2.1")
     }
     packaging {
         resources {

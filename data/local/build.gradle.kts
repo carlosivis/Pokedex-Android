@@ -1,17 +1,14 @@
 plugins {
-    alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("dev.carlosivis.android.library")
+    id("kotlin-kapt")
 }
 
-android {
-    namespace = "dev.carlosivis.pokedex.data.local"
-    compileSdk = 34
-}
+android.namespace = "dev.carlosivis.pokedex.data.local"
 
 dependencies {
-
-    implementation(libs.androidx.core.ktx)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    implementation(project(":core:commons"))
+    implementation(project(":repository"))
+    implementation(libs.koin.android)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.gson)
 }

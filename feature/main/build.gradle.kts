@@ -1,29 +1,11 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.dev.carlosivis.android.feature)
     id("kotlin-parcelize")
-    alias(libs.plugins.jetbrainsKotlinAndroid)
 }
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-}
+true
 
-android {
-    namespace = "dev.carlosivis.pokedex.feature.main"
-    compileSdk = 34
-    defaultConfig.minSdk = 24
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
-    }
-}
+android.namespace = "dev.carlosivis.pokedex.feature.main"
 
 dependencies {
 
@@ -43,16 +25,9 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.lifecycle.viewmodel.ktx)
-    implementation(libs.androidx.palette.ktx)
-    implementation(libs.accompanist.placeholder)
 
     testImplementation(libs.junit)
-    testImplementation(libs.mockk)
-    testImplementation(libs.kotlinx.coroutines.test)
-
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
 
 }

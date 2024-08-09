@@ -1,24 +1,12 @@
 plugins {
-    alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
-    alias(libs.plugins.compose.compiler)
+    id("dev.carlosivis.android.library")
+    id("dev.carlosivis.android.compose")
 }
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-}
+true
 
-android {
-    namespace = "dev.carlosivis.pokedex.core.navigation"
-    compileSdk = 34
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-}
+android.namespace = "dev.carlosivis.pokedex.core.navigation"
 
 dependencies {
-
     implementation(project(":core:commons"))
     implementation(project(":feature:main"))
     api(libs.androidx.navigation)
@@ -27,10 +15,4 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.androidx.core.ktx)
     implementation(libs.lifecycle.viewmodel.ktx)
-
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
 }

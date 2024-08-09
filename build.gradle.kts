@@ -1,13 +1,18 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
-    alias(libs.plugins.androidApplication) apply false
-    alias(libs.plugins.androidLibrary) apply false
-    alias(libs.plugins.jetbrainsKotlinAndroid) apply false
+    id("com.android.application") version ("7.4.2") apply false
+    id("com.android.library") version ("7.4.2") apply false
+    id("org.jetbrains.kotlin.android") version ("1.7.10") apply false
 }
+
 buildscript {
     repositories {
         maven {
             url = uri("https://plugins.gradle.org/m2/")
         }
+    }
+    dependencies {
+        classpath("com.google.gms:google-services:4.4.1")
+        classpath("com.google.firebase:firebase-crashlytics-gradle:3.0.1")
+        classpath("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.22.0")
     }
 }

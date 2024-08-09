@@ -1,28 +1,4 @@
 plugins {
-    alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("dev.carlosivis.kotlin.domain")
 }
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-}
-
-android {
-    namespace = "dev.carlosivis.pokedex.data.local"
-    compileSdk = 34
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-}
-dependencies {
-    implementation(project(":core:commons"))
-    implementation(libs.koin.core)
-    implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.androidx.core.ktx)
-
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-}
+true
