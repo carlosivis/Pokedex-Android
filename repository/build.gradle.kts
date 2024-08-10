@@ -1,12 +1,11 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("dev.carlosivis.kotlin.domain")
+    alias(libs.plugins.dev.carlosivis.kotlin.domain)
 }
 
 dependencies {
+    implementation(projects.core.commons)
+    api(projects.domain.pokemon)
     implementation(libs.koin.core)
     implementation(libs.kotlinx.coroutines.core)
-    implementation(project(":core:commons"))
-    api(project(":domain:pokemon"))
-    implementation(libs.androidx.core.ktx)
 }

@@ -2,7 +2,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("dev.carlosivis.android.compose")
+    alias(libs.plugins.dev.carlosivis.android.compose)
     id("com.google.gms.google-services")
 
 }
@@ -13,6 +13,7 @@ android {
     defaultConfig {
         applicationId = "dev.carlosivis.pokedex.app"
         minSdk = 24
+        compileSdk = 34
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -20,18 +21,9 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
-    buildFeatures {
-        compose = true
-    }
-
     packagingOptions{
         resources.excludes.add("META-INF/atomicfu.kotlin_module")
         resources.excludes.add("META-INF/DEPENDENCIES")
@@ -47,38 +39,21 @@ android {
         resources.excludes.add("META-INF/AL2.0,LGPL2.1")
         resources.excludes.add("META-INF/LGPL2.1")
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
 }
 
 dependencies {
 
+    implementation(projects.core.commons)
+    implementation(projects.core.core)
+    implementation(projects.core.navigation)
+    implementation(projects.core.uikit)
+    implementation(projects.data.local)
+    implementation(projects.data.remote)
+    implementation(projects.repository)
+
     implementation(libs.androidx.core.ktx)
+    implementation(platform(libs.kotlin.bom))
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(platform(libs.kotlin.bom))
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.compose.material)
-
     implementation(libs.koin.android)
-
-    implementation(project(":core:commons"))
-    implementation(project(":core:core"))
-    implementation(project(":core:navigation"))
-    implementation(project(":core:uikit"))
-    implementation(project(":data:remote"))
-    implementation(project(":repository"))
-
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
 }

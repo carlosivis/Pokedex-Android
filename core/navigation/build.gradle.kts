@@ -1,18 +1,17 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("dev.carlosivis.android.library")
-    id("dev.carlosivis.android.compose")
+    alias(libs.plugins.dev.carlosivis.android.library)
+    alias(libs.plugins.dev.carlosivis.android.compose)
 }
 true
 
 android.namespace = "dev.carlosivis.pokedex.core.navigation"
 
 dependencies {
-    implementation(project(":core:commons"))
-    implementation(project(":feature:main"))
+    implementation(projects.core.commons)
+    implementation(projects.feature.main)
     api(libs.androidx.navigation)
     api(libs.androidx.navigation.common.ktx)
     implementation(libs.koin.androidx.compose)
     implementation(libs.gson)
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.lifecycle.viewmodel.ktx)
 }

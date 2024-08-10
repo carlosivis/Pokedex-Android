@@ -1,4 +1,5 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("dev.carlosivis.kotlin.domain")
+    alias(libs.plugins.dev.carlosivis.kotlin.domain)
 }
 true

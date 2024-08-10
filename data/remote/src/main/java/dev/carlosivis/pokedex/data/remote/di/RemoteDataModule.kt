@@ -1,5 +1,6 @@
 package dev.carlosivis.pokedex.data.remote.di
 
+import dev.carlosivis.pokedex.data.remote.BuildConfig
 import dev.carlosivis.pokedex.data.remote.core.Retrofit
 import dev.carlosivis.pokedex.data.remote.datasource.PokemonRemoteDataSourceImpl
 import dev.carlosivis.pokedex.data.remote.interceptor.HearderInterceptor
@@ -13,7 +14,7 @@ val remoteDataModule = module {
 
     factory<PokemonService> {
         Retrofit(
-            baseUrl = "https://pokeapi.co/",
+            baseUrl = BuildConfig.BASE_URL,
             interceptor = get()
         )
     }

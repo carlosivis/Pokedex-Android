@@ -13,7 +13,7 @@ internal fun Project.configureAndroidDefaultSettings(
     secrets.load(this.project.rootProject.file("secrets.properties").inputStream())
 
     commonExtension.apply {
-        compileSdk = 33
+        compileSdk = 34
         defaultConfig {
             minSdk = 24
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -40,6 +40,13 @@ internal fun Project.configureAndroidDefaultSettings(
                 isJniDebuggable = true
                 proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), file("proguard-rules.pro"))
             }
+        }
+        buildTypes.all {
+            buildConfigField(
+                type = "String",
+                name = "BASE_URL",
+                value = secrets.getProperty("BASE_URL")
+            )
         }
 
         compileOptions {

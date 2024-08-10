@@ -1,7 +1,7 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("dev.carlosivis.android.library")
-    id("dev.carlosivis.android.compose")
+    alias(libs.plugins.dev.carlosivis.android.library)
+    alias(libs.plugins.dev.carlosivis.android.compose)
     id("kotlin-parcelize")
 }
 true
@@ -9,8 +9,7 @@ true
 android.namespace = "dev.carlosivis.pokedex.core"
 
 dependencies {
-    api(project(":core:commons"))
-    implementation(libs.androidx.core.ktx)
+    api(projects.core.commons)
     implementation(libs.koin.core)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)

@@ -18,7 +18,7 @@ internal fun Project.configureJetpackCompose(
         buildFeatures.compose = true
 
         composeOptions {
-            kotlinCompilerExtensionVersion = libs.getVersion("androidxComposeCompiler")
+            kotlinCompilerExtensionVersion = libs.getVersion("kotlin")
         }
 
         dependencies {

@@ -15,5 +15,4 @@ dependencies {
     implementation(libs.okhttp3.okhttp)
     implementation(libs.okhttp3.logging.interception)
     implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.androidx.core.ktx)
 }
