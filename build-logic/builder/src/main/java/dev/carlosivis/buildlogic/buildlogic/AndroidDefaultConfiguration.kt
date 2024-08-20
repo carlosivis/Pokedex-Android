@@ -21,14 +21,17 @@ internal fun Project.configureAndroidDefaultSettings(
         }
 
         compileOptions {
-            sourceCompatibility = JavaVersion.VERSION_11
-            targetCompatibility = JavaVersion.VERSION_11
+            sourceCompatibility = JavaVersion.VERSION_17
+            targetCompatibility = JavaVersion.VERSION_17
         }
 
         sourceSets {
             getByName("main").java.srcDir("src/main/kotlin")
         }
 
+        buildFeatures {
+            buildConfig = true
+        }
         buildTypes {
             getByName("release") {
                 isMinifyEnabled = true
@@ -48,10 +51,9 @@ internal fun Project.configureAndroidDefaultSettings(
                 value = secrets.getProperty("BASE_URL")
             )
         }
-
         compileOptions {
-            sourceCompatibility = JavaVersion.VERSION_11
-            targetCompatibility = JavaVersion.VERSION_11
+            sourceCompatibility = JavaVersion.VERSION_17
+            targetCompatibility = JavaVersion.VERSION_17
         }
     }
 }

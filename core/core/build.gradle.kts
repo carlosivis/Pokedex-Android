@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.dev.carlosivis.android.library)
     alias(libs.plugins.dev.carlosivis.android.compose)
+    id("org.jetbrains.kotlin.plugin.compose")
     id("kotlin-parcelize")
 }
 true

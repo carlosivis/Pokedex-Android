@@ -1,6 +1,5 @@
 [versions]
 androidxCore = "1.13.1"
-agp = "8.4.1"
 kotlin = "2.0.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -8,8 +7,9 @@ espressoCore = "3.6.1"
 koin = "3.5.6"
 kotlin-bom = "2.0.0"
 kotlinxCoroutines = "1.8.1"
-androidxLifecycle = "2.8.4"
+androidxLifecycle = "2.5.1"
 androidxNavigationKtx = "2.7.7"
+androidxRoom = "2.6.1"
 activityCompose = "1.9.0"
 composeBom = "2024.05.00"
 appcompat = "1.7.0"
@@ -56,6 +56,10 @@ retrofit2-converter-gson = { group = "com.squareup.retrofit2", name = "converter
 retrofit2-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidxRoom" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "androidxRoom" }
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidxRoom" }
+
 androidx-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigationKtx" }
 androidx-navigation-common-ktx = { group = "androidx.navigation", name = "navigation-common-ktx", version.ref = "androidxNavigationKtx" }
 lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
@@ -68,11 +72,6 @@ dev-carlosivis-kotlin-domain = { id = "dev.carlosivis.kotlin.domain", version = 
 dev-carlosivis-android-library = { id = "dev.carlosivis.android.library", version = "1.0.0" }
 dev-carlosivis-android-feature = { id = "dev.carlosivis.android.feature", version = "1.0.0" }
 dev-carlosivis-android-compose = { id = "dev.carlosivis.android.compose", version = "1.0.0" }
-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.1" }
-
-androidApplication = { id = "com.android.application", version.ref = "agp" }
-jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-androidLibrary = { id = "com.android.library", version.ref = "agp" }
 
 
