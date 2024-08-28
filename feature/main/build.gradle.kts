@@ -6,7 +6,7 @@ plugins {
 }
 true
 
-android.namespace = "dev.tavieto.hearthstone.feature.main"
+android.namespace = "dev.carlosivis.pokedex.feature.main"
 
 dependencies {
     implementation(projects.domain.pokemon)
